@@ -1,3 +1,11 @@
+* {
+  padding-left: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
 img {
   height: 10rem;
 }
@@ -10,7 +18,7 @@ ul {
 
 li {
   border: solid grey 2px;
-  width: 25%;
-  margin: 10px;
+  width: 20rem;
+  margin: 1rem;
   text-align: center;
 }

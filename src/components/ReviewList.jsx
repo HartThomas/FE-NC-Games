@@ -5,7 +5,6 @@ export default function ReviewList() {
   const [reviewList, setReviewList] = useState([]);
   useEffect(() => {
     getReviews().then((data) => {
-      console.log(data);
       setReviewList(data);
     });
   }, []);

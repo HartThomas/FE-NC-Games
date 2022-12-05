@@ -8,7 +8,6 @@ export function getReviews() {
   return api
     .get("/reviews")
     .then((res) => {
-      console.log(res.data.reviews);
       return res.data.reviews;
     })
     .catch(function (err) {
