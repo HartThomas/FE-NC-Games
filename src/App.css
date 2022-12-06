@@ -10,13 +10,13 @@ img {
   height: 10rem;
 }
 
-ul {
+.review-container {
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
 }
 
-li {
+.review {
   border: solid grey 2px;
   width: 20rem;
   margin: 1rem;
@@ -32,4 +32,14 @@ li {
 
 .review-image {
   float: right;
+}
+
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  border: solid grey 2px;
+  margin-left: 20px;
+  margin: 20px;
+  text-indent: 20px;
+  width: auto;
 }

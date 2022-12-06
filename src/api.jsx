@@ -21,3 +21,12 @@ export function getReviewByReviewId(review_id) {
     })
     .catch(console.log);
 }
+
+export function getCommentsByReviewId(review_id) {
+  return api
+    .get(`/reviews/${review_id}/comments`)
+    .then((res) => {
+      return res.data.comments;
+    })
+    .catch(console.log);
+}
