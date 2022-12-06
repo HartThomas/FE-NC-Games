@@ -4,31 +4,26 @@ import { getCommentsByReviewId, getReviewByReviewId } from "../api";
 
 export default function SingleReview() {
   let { review_id } = useParams();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isReviewLoading, setIsReviewLoading] = useState(true);
+  const [isCommentsLoading, setIsCommentsLoading] = useState(true);
   const [commentData, setCommentData] = useState([]);
-  const handleLoading = () => {
-    setIsLoading(false);
-  };
-  useEffect(() => {
-    window.addEventListener("load", handleLoading);
-    return () => window.removeEventListener("load", handleLoading);
-  }, []);
 
   const [reviewData, setReviewData] = useState({});
   useEffect(() => {
     getReviewByReviewId(review_id).then((data) => {
       setReviewData(data);
+      setIsReviewLoading(false);
     });
   }, [review_id]);
 
   useEffect(() => {
     getCommentsByReviewId(review_id).then((data) => {
       setCommentData(data);
-      setIsLoading(false);
+      setIsCommentsLoading(false);
     });
   }, [review_id]);
 
-  return isLoading ? (
+  return isReviewLoading && isCommentsLoading ? (
     <p>Loading...</p>
   ) : (
     <div className="single-review">
@@ -45,16 +40,20 @@ export default function SingleReview() {
       </div>
       <ul className="review-comments">
         <h3>Comments</h3>
-        {commentData.map((comment) => {
-          return (
-            <li className="comment-list" key={comment.comment_id}>
-              <p>Posted by: {comment.author}</p>
-              <p>{comment.body}</p>
-              <p>Posted at: {Date(comment.created_at)}</p>
-              <p>Votes: {comment.votes}</p>
-            </li>
-          );
-        })}
+        {commentData === undefined ? (
+          <h4>There are no comments yet... Be the first!</h4>
+        ) : (
+          commentData.map((comment) => {
+            return (
+              <li className="comment-list" key={comment.comment_id}>
+                <p>Posted by: {comment.author}</p>
+                <p>{comment.body}</p>
+                <p>Posted at: {Date(comment.created_at)}</p>
+                <p>Votes: {comment.votes}</p>
+              </li>
+            );
+          })
+        )}
       </ul>
     </div>
   );
