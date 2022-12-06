@@ -10,7 +10,14 @@ export function getReviews() {
     .then((res) => {
       return res.data.reviews;
     })
-    .catch(function (err) {
-      console.log(err);
-    });
+    .catch(console.log);
+}
+
+export function getReviewByReviewId(review_id) {
+  return api
+    .get(`/reviews/${review_id}`)
+    .then((res) => {
+      return res.data.review;
+    })
+    .catch(console.log);
 }

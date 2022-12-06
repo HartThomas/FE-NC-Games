@@ -22,3 +22,13 @@ li {
   margin: 1rem;
   text-align: center;
 }
+
+.single-review {
+  width: 80%;
+  padding-left: 10%;
+}
+
+.review-image {
+  padding: 5%;
+  float: right;
+}
