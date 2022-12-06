@@ -23,7 +23,7 @@ export default function SingleReview() {
     });
   }, [review_id]);
 
-  return isReviewLoading && isCommentsLoading ? (
+  return isReviewLoading || isCommentsLoading ? (
     <p>Loading...</p>
   ) : (
     <div className="single-review">

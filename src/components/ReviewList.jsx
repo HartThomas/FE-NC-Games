@@ -4,12 +4,16 @@ import { NavLink } from "react-router-dom";
 
 export default function ReviewList() {
   const [reviewList, setReviewList] = useState([]);
+  const [isReviewsLoading, setIsReviewsLoading] = useState(true);
   useEffect(() => {
     getReviews().then((data) => {
       setReviewList(data);
+      setIsReviewsLoading(false);
     });
   }, []);
-  return (
+  return isReviewsLoading ? (
+    <p>Loading ...</p>
+  ) : (
     <ul className="review-container">
       {reviewList.map((review) => {
         return (
