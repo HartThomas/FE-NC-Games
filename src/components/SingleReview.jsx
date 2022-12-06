@@ -4,13 +4,25 @@ import { getReviewByReviewId } from "../api";
 
 export default function SingleReview() {
   let { review_id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const handleLoading = () => {
+    setIsLoading(false);
+  };
+  useEffect(() => {
+    window.addEventListener("load", handleLoading);
+    return () => window.removeEventListener("load", handleLoading);
+  }, []);
+
   const [reviewData, setReviewData] = useState({});
   useEffect(() => {
     getReviewByReviewId(review_id).then((data) => {
       setReviewData(data);
+      setIsLoading(false);
     });
   }, [review_id]);
-  return (
+  return isLoading ? (
+    <p>Loading...</p>
+  ) : (
     <div className="single-review">
       <div className="review-text">
         <h3>{reviewData.title}</h3>

@@ -21,6 +21,8 @@ li {
   width: 20rem;
   margin: 1rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .single-review {
@@ -29,6 +31,5 @@ li {
 }
 
 .review-image {
-  padding: 5%;
   float: right;
 }
