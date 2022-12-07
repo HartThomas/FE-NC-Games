@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getCommentsByReviewId, getReviewByReviewId } from "../api";
+import {
+  getCommentsByReviewId,
+  getReviewByReviewId,
+  patchVotesByReviewId,
+} from "../api";
 
 export default function SingleReview() {
   let { review_id } = useParams();
@@ -9,9 +13,11 @@ export default function SingleReview() {
   const [commentData, setCommentData] = useState([]);
 
   const [reviewData, setReviewData] = useState({});
+  const [reviewVote, setReviewVote] = useState(0);
   useEffect(() => {
     getReviewByReviewId(review_id).then((data) => {
       setReviewData(data);
+      setReviewVote(data.votes);
       setIsReviewLoading(false);
     });
   }, [review_id]);
@@ -36,7 +42,23 @@ export default function SingleReview() {
         />
         <p>{reviewData.username}</p>
         <p>{reviewData.review_body}</p>
-        <p>Votes: {reviewData.votes}</p>
+        <p>Votes: {reviewVote}</p>
+        <button
+          onClick={() => {
+            setReviewVote(reviewVote + 1);
+            patchVotesByReviewId(review_id, 1);
+          }}
+        >
+          +1
+        </button>
+        <button
+          onClick={() => {
+            setReviewVote(reviewVote - 1);
+            patchVotesByReviewId(review_id, -1);
+          }}
+        >
+          -1
+        </button>
       </div>
       <ul className="review-comments">
         <h3>Comments</h3>
