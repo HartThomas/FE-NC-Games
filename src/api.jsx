@@ -30,3 +30,13 @@ export function getCommentsByReviewId(review_id) {
     })
     .catch(console.log);
 }
+
+export function patchVotesByReviewId(review_id, vote) {
+  const voteChange = { inc_votes: vote };
+  return api
+    .patch(`/reviews/${review_id}`, voteChange)
+    .then((res) => {
+      return res.data.review;
+    })
+    .catch(console.log);
+}
