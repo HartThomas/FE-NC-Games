@@ -1,38 +1,48 @@
 import { useEffect, useState } from "react";
-import { getReviews } from "../api";
+import { getCategories, getReviews } from "../api";
 import { NavLink } from "react-router-dom";
+import ReviewCard from "./ReviewCard";
 
 export default function ReviewList() {
   const [reviewList, setReviewList] = useState([]);
   const [isReviewsLoading, setIsReviewsLoading] = useState(true);
+  const [isCategoriesLoading, setIsCategoriesLoading] = useState(true);
+  const [categoryList, setCategoryList] = useState([]);
+
   useEffect(() => {
     getReviews().then((data) => {
       setReviewList(data);
       setIsReviewsLoading(false);
     });
   }, []);
-  return isReviewsLoading ? (
+
+  useEffect(() => {
+    getCategories().then((data) => {
+      setCategoryList(data);
+      setIsCategoriesLoading(false);
+    });
+  });
+
+  return isReviewsLoading || isCategoriesLoading ? (
     <p>Loading ...</p>
   ) : (
-    <ul className="review-container">
-      {reviewList.map((review) => {
-        return (
-          <li className="review" key={review.review_id}>
-            <NavLink to={`/reviews/${review.review_id}`}>
-              <h2>{review.title}</h2>
-            </NavLink>
-            <h3>{review.owner}</h3>
-            <NavLink to={`/reviews/${review.review_id}`}>
-              <img
-                className="card-image"
-                src={review.review_img_url}
-                alt={review.title}
-              ></img>
-            </NavLink>
-            <p>Votes: {review.votes}</p>
-          </li>
-        );
-      })}
-    </ul>
+    <div className="frontpage">
+      <ul className="category-container">
+        {categoryList.map((category) => {
+          return (
+            <li key={category.slug} className="single-category">
+              <NavLink to={`/reviews?category=${category.slug}`}>
+                <h2>{category.slug}</h2>
+              </NavLink>
+            </li>
+          );
+        })}
+      </ul>
+      <ul className="review-container">
+        {reviewList.map((review) => {
+          return <ReviewCard review={review} />;
+        })}
+      </ul>
+    </div>
   );
 }

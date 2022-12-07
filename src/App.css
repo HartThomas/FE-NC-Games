@@ -14,6 +14,7 @@ img {
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
+  width: 75%;
 }
 
 .review {
@@ -42,4 +43,48 @@ img {
   margin: 20px;
   text-indent: 20px;
   width: auto;
+}
+
+/* button styling */
+
+button {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid red;
+  border-radius: 0.6em;
+  color: red;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+button:hover {
+  color: #fff;
+  outline: 0;
+  box-shadow: 0 0 40px 40px red inset;
+}
+
+.frontpage {
+  display: flex;
+  flex-direction: row;
+}
+
+.single-category {
+  text-transform: capitalize;
+}
+
+.category-container {
+  padding: 5%;
+  list-style-type: none;
 }

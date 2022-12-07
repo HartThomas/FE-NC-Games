@@ -40,3 +40,40 @@ export function patchVotesByReviewId(review_id, vote) {
     })
     .catch(console.log);
 }
+
+export function getUsers() {
+  return api
+    .get(`/users`)
+    .then((res) => {
+      return res.data.users;
+    })
+    .catch(console.log);
+}
+
+export function postComment(review_id, name, text) {
+  const newComment = { username: name, body: text };
+  return api
+    .post(`/reviews/${review_id}/comments`, newComment)
+    .then((res) => {
+      return res.data.users;
+    })
+    .catch(console.log);
+}
+
+export function getCategories() {
+  return api
+    .get("/categories")
+    .then((res) => {
+      return res.data.categories;
+    })
+    .catch(console.log);
+}
+
+export function getReviewsByCategory(category_name) {
+  return api
+    .get(`/reviews?category=${category_name}`)
+    .then((res) => {
+      return res.data.reviews;
+    })
+    .catch(console.log);
+}
