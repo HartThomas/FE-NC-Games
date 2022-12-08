@@ -5,15 +5,16 @@ import {
   getReviewByReviewId,
   patchVotesByReviewId,
 } from "../api";
+import Form from "./Form";
 
-export default function SingleReview() {
+export default function SingleReview(props) {
   let { review_id } = useParams();
   const [isReviewLoading, setIsReviewLoading] = useState(true);
   const [isCommentsLoading, setIsCommentsLoading] = useState(true);
   const [commentData, setCommentData] = useState([]);
-
   const [reviewData, setReviewData] = useState({});
   const [reviewVote, setReviewVote] = useState(0);
+  const [seed, setSeed] = useState(1);
   useEffect(() => {
     getReviewByReviewId(review_id).then((data) => {
       setReviewData(data);
@@ -27,7 +28,7 @@ export default function SingleReview() {
       setCommentData(data);
       setIsCommentsLoading(false);
     });
-  }, [review_id]);
+  }, [review_id, seed]);
 
   return isReviewLoading || isCommentsLoading ? (
     <p>Loading...</p>
@@ -77,6 +78,7 @@ export default function SingleReview() {
           })
         )}
       </ul>
+      <Form review_id={review_id} setSeed={setSeed} user={props.user} />
     </div>
   );
 }

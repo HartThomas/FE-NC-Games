@@ -4,13 +4,11 @@ const api = axios.create({
   baseURL: "https://vast-pink-oyster-ring.cyclic.app/api",
 });
 
-export function getReviews() {
-  return api
-    .get("/reviews")
-    .then((res) => {
-      return res.data.reviews;
-    })
-    .catch(console.log);
+export function getReviews(category_name) {
+  let queryStr = "/reviews";
+  return api.get(queryStr, { params: { category_name } }).then((res) => {
+    return res.data.reviews;
+  });
 }
 
 export function getReviewByReviewId(review_id) {
@@ -39,4 +37,29 @@ export function patchVotesByReviewId(review_id, vote) {
       return res.data.review;
     })
     .catch(console.log);
+}
+
+export function getUsers() {
+  return api
+    .get(`/users`)
+    .then((res) => {
+      return res.data.users;
+    })
+    .catch(console.log);
+}
+
+export function postComment(review_id, name, text) {
+  const newComment = { username: name, body: text };
+  return api
+    .post(`/reviews/${review_id}/comments`, newComment)
+    .then((res) => {
+      return res.data.users;
+    })
+    .catch(console.log);
+}
+
+export function getCategories() {
+  return api.get("/categories").then((res) => {
+    return res.data.categories;
+  });
 }
