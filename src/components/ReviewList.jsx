@@ -21,7 +21,7 @@ export default function ReviewList() {
       setCategoryList(data);
       setIsCategoriesLoading(false);
     });
-  });
+  }, []);
 
   return isReviewsLoading || isCategoriesLoading ? (
     <p>Loading ...</p>
