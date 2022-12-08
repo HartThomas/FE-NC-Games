@@ -10,17 +10,16 @@ export default function ReviewList() {
   const [categoryList, setCategoryList] = useState([]);
 
   useEffect(() => {
-    getReviews().then((data) => {
-      setReviewList(data);
-      setIsReviewsLoading(false);
-    });
-  }, []);
-
-  useEffect(() => {
-    getCategories().then((data) => {
-      setCategoryList(data);
-      setIsCategoriesLoading(false);
-    });
+    getCategories()
+      .then((data) => {
+        setCategoryList(data);
+        setIsCategoriesLoading(false);
+        return getReviews();
+      })
+      .then((data) => {
+        setReviewList(data);
+        setIsReviewsLoading(false);
+      });
   }, []);
 
   return isReviewsLoading || isCategoriesLoading ? (

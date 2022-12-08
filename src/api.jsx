@@ -6,15 +6,9 @@ const api = axios.create({
 
 export function getReviews(category_name) {
   let queryStr = "/reviews";
-  if (category_name) {
-    queryStr += `?category=${category_name}`;
-  }
-  return api
-    .get(queryStr)
-    .then((res) => {
-      return res.data.reviews;
-    })
-    .catch(console.log);
+  return api.get(queryStr, { params: { category_name } }).then((res) => {
+    return res.data.reviews;
+  });
 }
 
 export function getReviewByReviewId(review_id) {
@@ -65,10 +59,7 @@ export function postComment(review_id, name, text) {
 }
 
 export function getCategories() {
-  return api
-    .get("/categories")
-    .then((res) => {
-      return res.data.categories;
-    })
-    .catch(console.log);
+  return api.get("/categories").then((res) => {
+    return res.data.categories;
+  });
 }
