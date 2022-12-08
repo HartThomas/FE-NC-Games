@@ -7,7 +7,7 @@ import {
 } from "../api";
 import Form from "./Form";
 
-export default function SingleReview() {
+export default function SingleReview(props) {
   let { review_id } = useParams();
   const [isReviewLoading, setIsReviewLoading] = useState(true);
   const [isCommentsLoading, setIsCommentsLoading] = useState(true);
@@ -78,7 +78,7 @@ export default function SingleReview() {
           })
         )}
       </ul>
-      <Form review_id={review_id} setSeed={setSeed} />
+      <Form review_id={review_id} setSeed={setSeed} user={props.user} />
     </div>
   );
 }

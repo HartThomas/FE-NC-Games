@@ -40,7 +40,7 @@ export default function ReviewList() {
       </ul>
       <ul className="review-container">
         {reviewList.map((review) => {
-          return <ReviewCard review={review} />;
+          return <ReviewCard review={review} key={review.review_id} />;
         })}
       </ul>
     </div>

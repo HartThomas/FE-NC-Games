@@ -4,9 +4,13 @@ const api = axios.create({
   baseURL: "https://vast-pink-oyster-ring.cyclic.app/api",
 });
 
-export function getReviews() {
+export function getReviews(category_name) {
+  let queryStr = "/reviews";
+  if (category_name) {
+    queryStr += `?category=${category_name}`;
+  }
   return api
-    .get("/reviews")
+    .get(queryStr)
     .then((res) => {
       return res.data.reviews;
     })
@@ -65,15 +69,6 @@ export function getCategories() {
     .get("/categories")
     .then((res) => {
       return res.data.categories;
-    })
-    .catch(console.log);
-}
-
-export function getReviewsByCategory(category_name) {
-  return api
-    .get(`/reviews?category=${category_name}`)
-    .then((res) => {
-      return res.data.reviews;
     })
     .catch(console.log);
 }
