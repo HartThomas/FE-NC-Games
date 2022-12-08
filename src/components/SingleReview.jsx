@@ -14,7 +14,7 @@ export default function SingleReview(props) {
   const [commentData, setCommentData] = useState([]);
   const [reviewData, setReviewData] = useState({});
   const [reviewVote, setReviewVote] = useState(0);
-  const [seed, setSeed] = useState(1);
+
   useEffect(() => {
     getReviewByReviewId(review_id).then((data) => {
       setReviewData(data);
@@ -28,7 +28,7 @@ export default function SingleReview(props) {
       setCommentData(data);
       setIsCommentsLoading(false);
     });
-  }, [review_id, seed]);
+  }, [review_id]);
 
   return isReviewLoading || isCommentsLoading ? (
     <p>Loading...</p>
@@ -78,7 +78,12 @@ export default function SingleReview(props) {
           })
         )}
       </ul>
-      <Form review_id={review_id} setSeed={setSeed} user={props.user} />
+      <Form
+        review_id={review_id}
+        setCommentData={setCommentData}
+        commentData={commentData}
+        user={props.user}
+      />
     </div>
   );
 }

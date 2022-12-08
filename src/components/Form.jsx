@@ -3,6 +3,7 @@ import { postComment } from "../api";
 
 export default function Form(props) {
   const [buttonWorks, setButtonWorks] = useState(true);
+  const commentData = props.commentData;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,7 +12,15 @@ export default function Form(props) {
         setButtonWorks(false);
         postComment(props.review_id, props.user, e.target[0].value)
           .then(() => {
-            props.setSeed();
+            props.setCommentData([
+              ...commentData,
+              {
+                author: props.user,
+                body: e.target[0].value,
+                create_at: new Date(),
+                votes: 0,
+              },
+            ]);
           })
           .then(() => {
             setButtonWorks(true);
