@@ -4,11 +4,20 @@ const api = axios.create({
   baseURL: "https://vast-pink-oyster-ring.cyclic.app/api",
 });
 
-export function getReviews(category_name) {
+export function getReviews(category_name, sortBy, order) {
   let queryStr = "/reviews";
-  return api.get(queryStr, { params: { category_name } }).then((res) => {
-    return res.data.reviews;
-  });
+  const sortByObj = {
+    Date: "created_at",
+    "Comment count": "comment_count",
+    Votes: "votes",
+  };
+  return api
+    .get(queryStr, {
+      params: { category_name, sort_by: sortByObj[sortBy], order },
+    })
+    .then((res) => {
+      return res.data.reviews;
+    });
 }
 
 export function getReviewByReviewId(review_id) {
