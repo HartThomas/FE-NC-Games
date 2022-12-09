@@ -3,17 +3,20 @@ import { useSearchParams } from "react-router-dom";
 import { getReviews } from "../api";
 import ReviewCard from "./ReviewCard";
 
-export default function ReviewsByCategory() {
+export default function ReviewsByCategory(props) {
   const [reviewListByCategory, setReviewListByCategory] = useState([]);
   let [searchParams] = useSearchParams();
   const [isReviewsLoading, setIsReviewsLoading] = useState(true);
 
   useEffect(() => {
-    getReviews(searchParams.get("category")).then((data) => {
-      setReviewListByCategory(data);
-      setIsReviewsLoading(false);
-    });
-  }, [searchParams]);
+    setIsReviewsLoading(true);
+    getReviews(searchParams.get("category"), props.sortBy, props.order).then(
+      (data) => {
+        setReviewListByCategory(data);
+        setIsReviewsLoading(false);
+      }
+    );
+  }, [searchParams, props.sortBy, props.order]);
 
   return isReviewsLoading ? (
     <p>Loading ...</p>

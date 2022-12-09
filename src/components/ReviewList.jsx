@@ -2,14 +2,12 @@ import { useEffect, useState } from "react";
 import { getCategories, getReviews } from "../api";
 import { NavLink } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
-import Dropdown from "react-dropdown";
 
-export default function ReviewList() {
+export default function ReviewList(props) {
   const [reviewList, setReviewList] = useState([]);
   const [isReviewsLoading, setIsReviewsLoading] = useState(true);
   const [isCategoriesLoading, setIsCategoriesLoading] = useState(true);
   const [categoryList, setCategoryList] = useState([]);
-  const options = ["Date", "Comment count", "Votes"];
 
   useEffect(() => {
     getCategories()
@@ -23,10 +21,6 @@ export default function ReviewList() {
         setIsReviewsLoading(false);
       });
   }, []);
-
-  const handleOnChange = (e) => {
-    console.log(e.value);
-  };
 
   return isReviewsLoading || isCategoriesLoading ? (
     <p>Loading ...</p>
@@ -43,17 +37,6 @@ export default function ReviewList() {
           );
         })}
       </ul>
-      <form>
-        <label>
-          Sort by:
-          <Dropdown
-            options={options}
-            value={options[0]}
-            onChange={handleOnChange}
-            placeholder="Select an option"
-          />
-        </label>
-      </form>
       <ul className="review-container">
         {reviewList.map((review) => {
           return <ReviewCard review={review} key={review.review_id} />;
