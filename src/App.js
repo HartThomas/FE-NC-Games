@@ -11,6 +11,7 @@ function App() {
   const [user, setUser] = useState();
   const [sortBy, setSortBy] = useState("Date");
   const [order, setOrder] = useState("desc");
+  const [categoryList, setCategoryList] = useState([]);
   return (
     <section>
       <h1>Game Reviews</h1>
@@ -19,6 +20,8 @@ function App() {
         setSortBy={setSortBy}
         setOrder={setOrder}
         order={order}
+        categoryList={categoryList}
+        setCategoryList={setCategoryList}
       />
       <Routes>
         <Route path="/" element={<Outlet />}>

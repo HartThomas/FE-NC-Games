@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import {
   getCommentsByReviewId,
   getReviewByReviewId,
@@ -84,6 +84,7 @@ export default function SingleReview(props) {
         commentData={commentData}
         user={props.user}
       />
+      <NavLink to="/">Home</NavLink>
     </div>
   );
 }
