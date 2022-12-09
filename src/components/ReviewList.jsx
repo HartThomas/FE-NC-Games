@@ -17,12 +17,10 @@ export default function ReviewList(props) {
   return isReviewsLoading ? (
     <p>Loading ...</p>
   ) : (
-    <div className="frontpage">
-      <ul className="review-container">
-        {reviewList.map((review) => {
-          return <ReviewCard review={review} key={review.review_id} />;
-        })}
-      </ul>
-    </div>
+    <ul className="review-container">
+      {reviewList.map((review) => {
+        return <ReviewCard review={review} key={review.review_id} />;
+      })}
+    </ul>
   );
 }

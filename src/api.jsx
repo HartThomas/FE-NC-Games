@@ -72,3 +72,8 @@ export function getCategories() {
     return res.data.categories;
   });
 }
+
+export function deleteComment(comment_id) {
+  console.log(comment_id);
+  return api.delete(`/comment/${comment_id}`);
+}

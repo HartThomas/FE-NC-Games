@@ -14,15 +14,17 @@ function App() {
   const [categoryList, setCategoryList] = useState([]);
   return (
     <section>
-      <h1>Game Reviews</h1>
-      <User user={user} setUser={setUser} className="user-info" />
-      <SearchRefinement
-        setSortBy={setSortBy}
-        setOrder={setOrder}
-        order={order}
-        categoryList={categoryList}
-        setCategoryList={setCategoryList}
-      />
+      <div className="frontpage">
+        <h1>Game Reviews</h1>
+        <User user={user} setUser={setUser} className="user-info" />
+        <SearchRefinement
+          setSortBy={setSortBy}
+          setOrder={setOrder}
+          order={order}
+          categoryList={categoryList}
+          setCategoryList={setCategoryList}
+        />
+      </div>
       <Routes>
         <Route path="/" element={<Outlet />}>
           <Route index element={<ReviewList setSortBy={setSortBy} />} />

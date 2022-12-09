@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import {
+  deleteComment,
   getCommentsByReviewId,
   getReviewByReviewId,
   patchVotesByReviewId,
@@ -14,6 +15,7 @@ export default function SingleReview(props) {
   const [commentData, setCommentData] = useState([]);
   const [reviewData, setReviewData] = useState({});
   const [reviewVote, setReviewVote] = useState(0);
+  const [canDelete, setCanDelete] = useState(true);
 
   useEffect(() => {
     getReviewByReviewId(review_id).then((data) => {
@@ -29,6 +31,17 @@ export default function SingleReview(props) {
       setIsCommentsLoading(false);
     });
   }, [review_id]);
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    if (canDelete) {
+      setCanDelete(false);
+      deleteComment(e.target.value).then(() => {
+        setCanDelete(true);
+        alert("Comment deleted. Have a good day!");
+      });
+    }
+  };
 
   return isReviewLoading || isCommentsLoading ? (
     <p>Loading...</p>
@@ -71,8 +84,13 @@ export default function SingleReview(props) {
               <li className="comment-list" key={comment.comment_id}>
                 <p>Posted by: {comment.author}</p>
                 <p>{comment.body}</p>
-                <p>Posted at: {Date(comment.created_at)}</p>
+                <p>Posted at: {comment.created_at}</p>
                 <p>Votes: {comment.votes}</p>
+                {comment.author === props.user ? (
+                  <button value={comment.comment_id} onClick={handleDelete}>
+                    Delete
+                  </button>
+                ) : null}
               </li>
             );
           })
