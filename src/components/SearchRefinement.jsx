@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Dropdown from "react-dropdown";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { getCategories } from "../api";
@@ -17,7 +16,7 @@ export default function SearchRefinement(props) {
   }, [setCategoryList]);
 
   const handleOnChange = (e) => {
-    props.setSortBy(e.value);
+    props.setSortBy(e.target.value);
     navigate("/reviews");
   };
 
@@ -33,16 +32,15 @@ export default function SearchRefinement(props) {
   };
 
   return (
-    <>
+    <div className="search-refinement">
       <form>
         <label>
           Sort by:
-          <Dropdown
-            options={options}
-            value={options[0]}
-            onChange={handleOnChange}
-            placeholder="Select an option"
-          />
+          <select name="sort-by" onChange={handleOnChange}>
+            <option value={options[0]}>{options[0]}</option>
+            <option value={options[1]}>{options[1]}</option>
+            <option value={options[2]}>{options[2]}</option>
+          </select>
         </label>
         <label>
           {props.order === "desc" ? (
@@ -63,6 +61,6 @@ export default function SearchRefinement(props) {
           );
         })}
       </ul>
-    </>
+    </div>
   );
 }

@@ -31,7 +31,7 @@ export default function User(props) {
   };
 
   return user ? (
-    <>
+    <div className="user-info">
       <p>Logged in as {user}</p>
       <form onSubmit={handleSubmit}>
         <label>
@@ -40,17 +40,17 @@ export default function User(props) {
           <input type="submit" value="Submit" />
         </label>
       </form>
-    </>
+    </div>
   ) : (
-    <>
+    <div className="user-info">
       <p>Not logged in!</p>
       <form onSubmit={handleSubmit}>
         <label>
           Username:
           <input type="text"></input>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" className="submit-button" />
         </label>
       </form>
-    </>
+    </div>
   );
 }
