@@ -1,15 +1,17 @@
-* {
-  padding-left: 0;
-  /* border: solid grey 2px; */
+p {
+  padding-left: 5px;
 }
 
 body {
-  /* background-image: url("https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1631&q=80"); */
   background-image: radial-gradient(rgba(126, 58, 58, 0.61), beige);
 }
 
 h1 {
   text-align: center;
+  float: top;
+  background-image: url("https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1631&q=80");
+  background-position: 50%;
+  color: beige;
 }
 
 img {
@@ -21,7 +23,7 @@ img {
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
-  width: 75%;
+  width: auto;
 }
 
 .review {
@@ -34,8 +36,8 @@ img {
 }
 
 .single-review {
-  width: 80%;
-  padding-left: 10%;
+  width: auto;
+  padding-left: 20px;
 }
 
 .review-image {
@@ -58,9 +60,9 @@ button {
   box-sizing: border-box;
   appearance: none;
   background-color: transparent;
-  border: 2px solid red;
+  border: 2px solid green;
   border-radius: 0.6em;
-  color: red;
+  color: green;
   cursor: pointer;
   display: flex;
   align-self: center;
@@ -77,14 +79,14 @@ button {
   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
 button:hover {
-  color: #fff;
+  color: beige;
   outline: 0;
-  box-shadow: 0 0 40px 40px red inset;
+  box-shadow: 0 0 40px 40px green inset;
 }
 
 .frontpage {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .single-category {
@@ -98,4 +100,73 @@ button:hover {
 
 .user-info {
   float: right;
+}
+
+section {
+  display: flex;
+}
+
+form {
+  padding: 10px;
+}
+
+.search-refinement {
+  border: grey 2px solid;
+}
+
+.user-info {
+  border: grey 2px solid;
+}
+
+.review-body {
+  border-top: grey 2px solid;
+  border-bottom: grey 2px solid;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+select {
+  margin-left: 10px;
+  background-color: rgb(247, 232, 215);
+}
+
+.voting-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-input {
+  display: flex;
+  flex-direction: column;
+}
+
+textarea {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgb(247, 232, 215);
+}
+
+.submit-button {
+  width: 30%;
+  background-color: rgba(126, 58, 58, 0.205);
+}
+
+input[type="text"] {
+  background-color: rgb(247, 232, 215);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+a {
+  margin-bottom: 20px;
+}
+
+.home-link {
+  float: bottom;
+  bottom: 0;
 }

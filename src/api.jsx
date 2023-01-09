@@ -21,12 +21,10 @@ export function getReviews(category_name, sortBy, order) {
 }
 
 export function getReviewByReviewId(review_id) {
-  return api
-    .get(`/reviews/${review_id}`)
-    .then((res) => {
-      return res.data.review;
-    })
-    .catch(console.log);
+  return api.get(`/reviews/${review_id}`).then((res) => {
+    console.log(res);
+    return res.data.review;
+  });
 }
 
 export function getCommentsByReviewId(review_id) {
@@ -71,4 +69,8 @@ export function getCategories() {
   return api.get("/categories").then((res) => {
     return res.data.categories;
   });
+}
+
+export function deleteComment(comment_id) {
+  return api.delete(`/comment/${comment_id}`);
 }
