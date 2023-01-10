@@ -18,11 +18,11 @@ export default function SingleReview(props) {
   const [reviewVote, setReviewVote] = useState(0);
   const [canDelete, setCanDelete] = useState(true);
   const [reviewExist, setReviewExist] = useState(true);
+  const [votingWorks, setVotingWorks] = useState(true);
 
   useEffect(() => {
     getReviewByReviewId(review_id)
       .then((data) => {
-        console.log(data);
         setReviewData(data);
         setReviewVote(data.votes);
         setIsReviewLoading(false);
@@ -42,6 +42,16 @@ export default function SingleReview(props) {
       setIsCommentsLoading(false);
     });
   }, [review_id, commentData]);
+
+  const handleVoting = (e) => {
+    if (votingWorks) {
+      setVotingWorks(false);
+      setReviewVote(reviewVote + +e.target.innerText);
+      patchVotesByReviewId(review_id, e.target.innerText).then(() => {
+        setVotingWorks(true);
+      });
+    }
+  };
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -74,22 +84,8 @@ export default function SingleReview(props) {
         <p className="review-body">{reviewData.review_body}</p>
         <p>Votes: {reviewVote}</p>
         <div className="voting-buttons">
-          <button
-            onClick={() => {
-              setReviewVote(reviewVote + 1);
-              patchVotesByReviewId(review_id, 1);
-            }}
-          >
-            +1
-          </button>
-          <button
-            onClick={() => {
-              setReviewVote(reviewVote - 1);
-              patchVotesByReviewId(review_id, -1);
-            }}
-          >
-            -1
-          </button>
+          <button onClick={handleVoting}>+1</button>
+          <button onClick={handleVoting}>-1</button>
         </div>
       </div>
       <ul className="review-comments">

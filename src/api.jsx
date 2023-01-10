@@ -11,9 +11,14 @@ export function getReviews(category_name, sortBy, order) {
     "Comment count": "comment_count",
     Votes: "votes",
   };
+  const paramsObj = { sort_by: sortByObj[sortBy], order };
+  if (category_name && category_name !== "") {
+    paramsObj.category = category_name;
+  }
+
   return api
     .get(queryStr, {
-      params: { category_name, sort_by: sortByObj[sortBy], order },
+      params: paramsObj,
     })
     .then((res) => {
       return res.data.reviews;
@@ -22,7 +27,6 @@ export function getReviews(category_name, sortBy, order) {
 
 export function getReviewByReviewId(review_id) {
   return api.get(`/reviews/${review_id}`).then((res) => {
-    console.log(res);
     return res.data.review;
   });
 }

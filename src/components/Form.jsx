@@ -26,6 +26,7 @@ export default function Form(props) {
               ]);
             })
             .then(() => {
+              e.target.reset();
               setButtonWorks(true);
             });
         } else {

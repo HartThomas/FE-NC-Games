@@ -8,30 +8,21 @@ export default function ReviewsByCategory(props) {
   const [reviewListByCategory, setReviewListByCategory] = useState([]);
   let [searchParams] = useSearchParams();
   const [isReviewsLoading, setIsReviewsLoading] = useState(true);
-  const categoryOptions = [
-    "strategy",
-    "hidden-roles",
-    "dexterity",
-    "push-your-luck",
-    "roll-and-write",
-    "deck-building",
-    "engine-building",
-  ];
   const [categoryExist, setCategoryExist] = useState(true);
 
   useEffect(() => {
     setIsReviewsLoading(true);
-    if (categoryOptions.includes(searchParams.get("category"))) {
-      getReviews(searchParams.get("category"), props.sortBy, props.order).then(
-        (data) => {
-          setReviewListByCategory(data);
+    getReviews(searchParams.get("category"), props.sortBy, props.order)
+      .then((data) => {
+        setReviewListByCategory(data);
+        setIsReviewsLoading(false);
+      })
+      .catch((err) => {
+        if (err.response.data.msg === "Invalid query") {
+          setCategoryExist(false);
           setIsReviewsLoading(false);
         }
-      );
-    } else {
-      setCategoryExist(false);
-      setIsReviewsLoading(false);
-    }
+      });
   }, [searchParams, props.sortBy, props.order]);
 
   return isReviewsLoading ? (

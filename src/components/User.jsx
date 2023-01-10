@@ -25,26 +25,32 @@ export default function User(props) {
         .includes(e.target[0].value)
     ) {
       setUser(e.target[0].value);
+      e.target.reset();
     } else {
       alert("That username doesn't match our records.");
     }
   };
 
+  const handleLogout = (e) => {
+    setUser(undefined);
+  };
+
   return user ? (
     <div className="user-info">
       <p>Logged in as {user}</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="login-form">
         <label>
           Username:
           <input type="text"></input>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" className="submit-button" />
         </label>
       </form>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   ) : (
     <div className="user-info">
       <p>Not logged in!</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="login-form">
         <label>
           Username:
           <input type="text"></input>
