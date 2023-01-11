@@ -41,7 +41,7 @@ export default function SingleReview(props) {
       setCommentData(data);
       setIsCommentsLoading(false);
     });
-  }, [review_id, commentData]);
+  }, [review_id]);
 
   const handleVoting = (e) => {
     if (votingWorks) {
