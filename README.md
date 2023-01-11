@@ -20,6 +20,7 @@ If you want to run this project locally:
 
 ```
 $ git clone https://github.com/HartThomas/FE-NC-Games
+$ cd FE-NC-GAMES
 $ npm i
 $ npm start
 ```
